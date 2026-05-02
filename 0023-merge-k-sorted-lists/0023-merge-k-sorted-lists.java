@@ -14,15 +14,18 @@ class Solution {
         if(lists.length==0) return null;
         for(int i=0; i<lists.length;i++){
             ListNode head= lists[i];
-            while(head!=null){
-                q.add(head);
-                head=head.next;
+            if(head!= null){
+                q.offer(head);
             }
         }
         ListNode dummy= new ListNode(0);
         ListNode head=dummy;
         while(!q.isEmpty()){
-            head.next= q.poll();
+            ListNode min= q.poll();
+            head.next=min;
+            if(min.next != null){
+                q.offer(min.next);
+            }     
             head=head.next;
         }
         return dummy.next;
